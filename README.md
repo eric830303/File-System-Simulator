@@ -6,13 +6,18 @@
 should be C++11 (or later version)
 
 ---
-## Check
-* The text files of source codes MUST be placed in the directory of **src**
-* There MUST exist the other directory, named **obj**. It's used to store object code
-* Makfile **makefile** must exist.
-* **./setting/user.txt** stores the information of users. It must exist.
-* **./setting/tree.txt** stores the structure of file system. It must exist. Otherwise, the program cannot work
-* **./setting/file.txt** stores the contents of files.
+## Check Before Compiling
+* **makefile** exists. You cannot compile without the file.
+* **src** (a directory) exists. It contains all source code.
+* **obj** (a firectory) exists. It will contain object code.
+
+---
+## Check Before Running
+* **setting** (a directory) exists. And it contains following files:
+1. **setting/user.txt** existstores the information of users. It must exist.
+2. **setting/tree.txt** stores the structure of file system. It must exist. Otherwise, the program cannot work
+3. **setting/file.txt** stores the contents of files.
+
 ---
 ## Run
 * Run command **make** on your terminal
