@@ -6,15 +6,15 @@
 
 ---
 ## Check Before Compiling
-* **makefile** must exists. You cannot compile without the file.
-* **src** (a directory) exists. It contains all source code.
-* **obj** (a firectory) exists. It will contain object code.
+* **makefile** must exist. You cannot compile without the file.
+* **src** (a directory) must exists. It contains all source code.
+* **obj** (a firectory) must exists. It will contain object code.
 ---
 ## Check Before Running
-* **setting** (a directory) exists. And it contains following files:
- 1. **setting/user.txt** exists. It stores the information of users. It must exist.
- 2. **setting/tree.txt** exists. It stores the structure of file system. It must exist. Otherwise, the program cannot work
- 3. **setting/file.txt** exists. It stores the contents of files.
+* **setting** (a directory) must exists. And it contains following files:
+ 1. **setting/user.txt** must exists. It stores the information of users. It must exist.
+ 2. **setting/tree.txt** must exists. It stores the structure of file system. It must exist. Otherwise, the program cannot work
+ 3. **setting/file.txt** must exists. It stores the contents of files.
 ---
 ## Run
 * Run command **make** on your terminal
