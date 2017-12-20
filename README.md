@@ -10,8 +10,9 @@ should be C++11 (or later version)
 * The text files of source codes MUST be placed in the directory of **src**
 * There MUST exist the other directory, named **obj**. It's used to store object code
 * Makfile **makefile** must exist.
-* **user.txt** stores the information of users.
-
+* **./setting/user.txt** stores the information of users. It must exist.
+* **./setting/tree.txt** stores the structure of file system. It must exist. Otherwise, the program cannot work
+* **./setting/file.txt** stores the contents of files.
 ---
 ## Run
 * Run command **make** on your terminal
