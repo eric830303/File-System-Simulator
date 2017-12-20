@@ -14,9 +14,9 @@ should be C++11 (or later version)
 ---
 ## Check Before Running
 * **setting** (a directory) exists. And it contains following files:
-1. **setting/user.txt** existstores the information of users. It must exist.
-2. **setting/tree.txt** stores the structure of file system. It must exist. Otherwise, the program cannot work
-3. **setting/file.txt** stores the contents of files.
+ 1. **setting/user.txt** existstores the information of users. It must exist.
+ 2. **setting/tree.txt** stores the structure of file system. It must exist. Otherwise, the program cannot work
+ 3. **setting/file.txt** stores the contents of files.
 
 ---
 ## Run
