@@ -62,6 +62,7 @@ class FileSystem
 {
 private:
     vector<UserInfo> vUser  ;
+    vector<MyFile*>  vFile  ;
     map   <int,MyFile*>  mFile  ;
     MyDir   *currentDir     ;
     MyFile  *copytempfile   ;
@@ -73,25 +74,31 @@ private:
     int     filenumber      ;
 
 public:
-    //----- Memeber Access ---------------------------------
+    //----- Memeber Access --------------------------------------------------
     vector< UserInfo > &getUserVector(){ return vUser ; }
+    vector< MyFile*  > &getFileVector(){ return vFile ; }
     map   < int,MyFile* >  &getFileMap()   { return mFile ; }
     void setFileNumber( int n ){ filenumber = n    ; }
     int  getFileNumber( )      { return filenumber ; }
-    //----- Function ---------------------------------------
-    void   run() ;
+    
+    //----- Func (Read before execution) ------------------------------------
     void   readUserInfo();
     void   readDirTree() ;
     void   readFileContent();
+    MyDir* BuildDir( string DirName, MyDir *currentDir ) ;
     void   BuildFile( string FileName, int filecount, MyDir *currentDir, int fid );
     void   BuildDirFile( ifstream & token, vector<string> strspl, MyDir *currentDir );
+    //----- Func (dump before ending) ---------------------------------------
     void   dumpDirContent( FILE* f, FILE*f2,MyDir* currentDir, int layer );
     void   dumpDirTree() ;
+    //----- Func (Operation) ------------------------------------------------
+    void   run() ;
     int    login( string, string ) ;
     int    fsOperate( string, string );
     int    regist( string, string );
     int    setUser( string, string);
-    MyDir* BuildDir( string DirName, MyDir *currentDir ) ;
+    void   AskUserUsingTopFive()   ;
+   
     
     //----- Destructor --------------------------------------
     FileSystem();
