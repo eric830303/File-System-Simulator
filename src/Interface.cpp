@@ -88,6 +88,7 @@ int FileSystem::login( string username, string password )
 int FileSystem::fsOperate( string user, string passwd )
 {
     this->setUser( user , passwd );
+    this->AskUserUsingTopFive() ;
     while( 1 )
     {
         system("clear");
@@ -279,6 +280,7 @@ void  FileSystem::BuildFile( string FileName, int filecount, MyDir *currentDir, 
         newFile->size = 0 ;
         newFile->preDir = currentDir ;
         currentDir->filePtr = newFile ;
+        this->getFileVector().push_back(newFile);
         
     }
     currentDir->filePtr->size = 0;
@@ -474,6 +476,46 @@ void FileSystem::readFileContent()
             }
         }
     }
+}
+//****************************************************************************************
+//* Fun Name: AskUserUsingTopFive                                                        *
+//* Work: Ask user whether enter the top five directory at begining                      *
+//* Where to be called: run()                                                            *
+//* Editor: Tien-Hung Tseng                                                              *
+//****************************************************************************************
+bool compare( MyFile*A, MyFile*B)
+{
+    return (A->count > B->count) ;
+}
+void FileSystem::AskUserUsingTopFive()
+{
+    sort( this->getFileVector().begin(), this->getFileVector().end(), compare );
+    //--Show Top Five-------
+    int TopCount = 5 ;
+    printf("Top %d files\n", TopCount );
+    for( int i = 0 ; i < TopCount ; i++ )
+    {
+        if( i >= this->getFileVector().size() ) break ;
+        MyFile *file = this->getFileVector().at(i) ;
+        printf("%d. ", i );
+        this->show_path( file->preDir ) ;
+        printf("/%s %d\n", file->name.c_str(), file->count );
+    }
+
+    int choice = 0 ;
+    while( true )
+    {
+        printf("which file do you wanna switch? (please type number 0~4):\n");
+        cin >> choice ;
+        if( choice < 0 || choice >= TopCount )//out of range
+        {
+            printf( RED"[Error]" RESET"Your input is out of range, please try again\n" );
+            sleep(1) ;
+        }
+        else break ;
+    }
+    assert( choice < TopCount && choice >= 0 );
+    this->currentDir = this->getFileVector().at( choice )->preDir ;
 }
 //****************************************************************************************
 //* Fun Name: run                                                                        *

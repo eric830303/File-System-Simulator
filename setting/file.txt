@@ -1,8 +1,8 @@
-6	This is file "Chinese"
-5	This is file "English"
-4	This is file "cost"
-3	This is file "funny"
-2	This is file3
-1	This is file2
 0	This is file1
+1	This is file2
+2	This is file3
 7	NOHAHAHAHAHA
+5	This is file "English"
+6	This is file "Chinese"
+3	This is file "funny"
+4	This is file "cost"

@@ -114,12 +114,15 @@ int FileSystem::newFile() {
 
         /*Rebuild the Linked List*/
         p->nextFile = currentDir->filePtr;
-        //p->size=0;
         currentDir->filePtr = p;
-        MyDir *h = currentDir;
+        p->preDir = currentDir ;
+        /*put the file into vector*/
+        this->getFileVector().push_back( p ) ;
 
         /*Resize the size of upper layer direcotory*/
-        while (h != NULL) {
+        MyDir *h = currentDir;
+        while (h != NULL)
+        {
             h->size += p->size;
             h = h->preDir;
         }
@@ -656,7 +659,7 @@ int FileSystem::showCurrentDir()
 
 int FileSystem::showPath()//Show the current path
 {
-    show_path(currentDir);
+    show_path( this->currentDir );
     return 1;
 }
 int FileSystem::goback() {
