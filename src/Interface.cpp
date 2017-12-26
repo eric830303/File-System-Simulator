@@ -256,7 +256,7 @@ void  FileSystem::BuildFile( string FileName, int filecount, MyDir *currentDir, 
 {
     MyFile *newFile = new MyFile( id ) ;
     newFile->name = FileName ;
-
+    newFile->count= filecount;
     if( currentDir->filePtr == NULL )
     {
         newFile->nextFile = currentDir->filePtr;
@@ -280,9 +280,9 @@ void  FileSystem::BuildFile( string FileName, int filecount, MyDir *currentDir, 
         newFile->size = 0 ;
         newFile->preDir = currentDir ;
         currentDir->filePtr = newFile ;
-        this->getFileVector().push_back(newFile);
         
     }
+    this->getFileVector().push_back(newFile);
     currentDir->filePtr->size = 0;
     this->setFileNumber( this->getFileNumber()+1 );
     disk_empty = disk_empty - newFile->size;
@@ -492,7 +492,7 @@ void FileSystem::AskUserUsingTopFive()
     sort( this->getFileVector().begin(), this->getFileVector().end(), compare );
     //--Show Top Five-------
     int TopCount = 5 ;
-    printf("Top %d files\n", TopCount );
+    printf("\n\nTop %d files:\n", TopCount );
     for( int i = 0 ; i < TopCount ; i++ )
     {
         if( i >= this->getFileVector().size() ) break ;
@@ -505,11 +505,13 @@ void FileSystem::AskUserUsingTopFive()
     int choice = 0 ;
     while( true )
     {
-        printf("which file do you wanna switch? (please type number 0~4):\n");
+        printf("Which file do you wanna switch? (please type number 0~4)\n");
+        printf("If you do not wanna switch top 5 files, please type -1:\nYour choices is:");
         cin >> choice ;
-        if( choice < 0 || choice >= TopCount )//out of range
+        if( choice == -1 )  return ;
+        else if( choice < 0 || choice >= TopCount || choice > this->getFileVector().size() )//out of range
         {
-            printf( RED"[Error]" RESET"Your input is out of range, please try again\n" );
+            printf( RED"[Error]" RESET" Your input is out of range, please try again\n" );
             sleep(1) ;
         }
         else break ;
@@ -547,6 +549,8 @@ void FileSystem::run()
         cout << "\t\t**********************************************************t" << endl;
         cout << "\t\tPlease choice: " ;
         cin >> choice;
+        cout << choice ;
+        
         switch ( choice )
         {
             /*Register*/
@@ -618,7 +622,8 @@ void FileSystem::run()
                     break;
             default:
                     printf( RED"[Error] " RESET"The file system can not recognize your choice !\n" );
-                    sleep(5);
+                    sleep(1);
+                
                     break;
         }
     }
