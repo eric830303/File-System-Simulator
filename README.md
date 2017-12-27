@@ -7,8 +7,8 @@
 ---
 ## Check Before Compiling
 * **makefile** must exist. You cannot compile without the file.
-* **src** (a directory) must exist. It contains all source code.
-* **obj** (a firectory) must exist. It will contain object code.
+* **src** (a directory) must exist. It contains all source code (i.g., main.cpp ... etc).
+* **obj** (a directory) must exist. It will contain object code.
 ---
 ## Check Before Running
 * **setting** (a directory) must exists. And it contains following files:
