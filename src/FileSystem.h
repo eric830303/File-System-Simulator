@@ -94,7 +94,7 @@ public:
     void   find(char* fileName) ;
     int    splitPath (char* path, char** split_path);
     int    dirExist (MyDir *p, char* path);
-    //int readDir (int number = 0, char** possible_file_path = 0);
+    int    readDir (int number = 0, char** possible_file_path = 0);
     //----- Func (dump before ending) ---------------------------------------
     void   dumpDirContent( FILE* f, FILE*f2,MyDir* currentDir, int layer );
     void   dumpDirTree() ;
@@ -122,7 +122,7 @@ public:
     int dele_dir(MyDir *d);
     int deleteDir();
     //4
-    int readDir();
+    //int readDir();
     int readFile();
     //5
     int renameDir();

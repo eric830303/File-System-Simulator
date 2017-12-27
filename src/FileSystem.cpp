@@ -320,24 +320,12 @@ int FileSystem::deleteDir() {
     return 1;
 
 }
-
-int FileSystem::readDir() {
-    char name[MAX_NAME];
-    MyDir *p;
-    p = currentDir->dirPtr;
-
-    cin >> name;
-    while (p != NULL) {
-        if (strcmp(p->name.c_str(), name) == 0) {
-            currentDir = p;
-            return 1;
-        }
-        p = p->nextDir;
-    }
-    cout << "NO DIR             -FALSE" << endl;
-    return 0;
-}
-/*
+//****************************************************************************************
+//* Fun Name:readDir                                                                     *
+//* Work: cd (change directory)                                                          *
+//* Where to be called: fsOperate()                                                      *
+//* Editor: WEI-CHENG, JHUANG                                                            *
+//* **************************************************************************************
 int FileSystem::readDir (int number, char** possible_file_path) {
     char name[MAX_NAME];
     char **split_path = 0;
@@ -350,6 +338,11 @@ int FileSystem::readDir (int number, char** possible_file_path) {
     split_path = (char**) malloc (sizeof (char*) * MAX_NAME);
     for (int i = 0; i < MAX_NAME; i++) {
         split_path [i] = (char*) malloc (sizeof (char) * MAX_NAME);
+    }
+    for (int i = 0; i < MAX_NAME; i++) {
+        for (int j = 0; j < MAX_NAME;j++) {
+            split_path [i][j] = 0;
+        }
     }
     
     p = currentDir->dirPtr;
@@ -366,10 +359,8 @@ int FileSystem::readDir (int number, char** possible_file_path) {
             possible_file_path [number][i] = possible_file_path [number][i + 2];
         }
     }
-    printf ("name = %s\n", possible_file_path [number]);
     path_count = splitPath (possible_file_path [number], split_path);
-    printf ("split = %s\n", split_path[0]);
-    if ((strchr (split_path [0], 'r') != NULL) && path_count == 1) {
+    if ((split_path [0][0] == 'r' && split_path [0][1] == 0) && path_count == 1) {
         p = currentDir;
         while (1) {
             if (p->preDir == NULL) {
@@ -380,17 +371,19 @@ int FileSystem::readDir (int number, char** possible_file_path) {
         loop_count = path_count;
         change_dir = true;
     }
-    
     while (loop_count < path_count) {
         if (dirExist (p, split_path [loop_count])) {
             change_dir = true;
-            if (p->dirPtr != NULL) {
-                if (path_count != 1) {
-                    p = p->dirPtr;
+            while (p != NULL) {
+                if (strcmp(p->name.c_str(), split_path [loop_count]) == 0) {
+                    if (p->dirPtr != NULL) {
+                        if (loop_count + 1 != path_count) {
+                            p = p->dirPtr;
+                        }
+                    }
+                    break;
                 }
-            }
-            else {
-                end_dir = true;
+                p = p->nextDir;
             }
         }
         else {
@@ -400,6 +393,14 @@ int FileSystem::readDir (int number, char** possible_file_path) {
         loop_count++;
     }
     
+    if (end_dir && path_count != 1) {
+        while (p != NULL) {
+            if (strcmp(p->name.c_str(), split_path [loop_count - 1]) == 0) {
+                break;
+            }
+            p = p->nextDir;
+        }
+    }
     for (int i = 0; i < path_count; i++) {
         if (path_count != 1) {
             free (split_path [i]);
@@ -409,9 +410,7 @@ int FileSystem::readDir (int number, char** possible_file_path) {
     if (path_count != 1) {
         free (split_path);
     }
-    if (!end_dir && path_count != 1) {
-        p = p->preDir;
-    }
+    
     if (change_dir) {
         currentDir = p;
         return 1;
@@ -422,7 +421,12 @@ int FileSystem::readDir (int number, char** possible_file_path) {
     
     return 0;
 }
-*/
+//****************************************************************************************
+//* Fun Name:dirExist()                                                                  *
+//* Work: Check whether the dir exist                                                    *
+//* Where to be called: readDir()                                                        *
+//* Editor: WEI-CHENG, JHUANG                                                            *
+//* **************************************************************************************
 int FileSystem::dirExist (MyDir *p, char* path) {
     while (p != NULL) {
         if (strcmp(p->name.c_str(), path) == 0) {
@@ -432,14 +436,18 @@ int FileSystem::dirExist (MyDir *p, char* path) {
     }
     return 0;
 }
-
+//****************************************************************************************
+//* Fun Name:dirExist()                                                                  *
+//* Work: split the string of path                                                       *
+//* Where to be called: readDir()                                                        *
+//* Editor: WEI-CHENG, JHUANG                                                            *
+//* **************************************************************************************
 int FileSystem::splitPath (char* path, char** split_path) {
     int path_count = 0;
     int str_count = 0;
     if (strchr (path, '/') == NULL) {
-        for (int i = 0; path [i + 1] != 0; i++) {
+        for (int i = 0; path [i] != 0; i++) {
             split_path [path_count][i] = path [i];
-	printf ("%c %d\n", path [i], path [i]);
         }
         path_count++;
     }

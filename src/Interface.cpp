@@ -115,10 +115,9 @@ int FileSystem::fsOperate( string user, string passwd )
             else if (choice == "rename")
                 this->renameFile();
             else if (choice == "cd") {
-                //char *name [MAX_NAME];
-                //cin >> name [0];
-                //this->readDir(0, name);
-                this->readDir() ;
+                char *name [MAX_NAME];
+                cin >> name[0] ;
+                this->readDir(0, name);
             }
             else if (choice == "read")
                 this->readFile();
