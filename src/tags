@@ -1,0 +1,112 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AskUserUsingTopFive	Interface.cpp	/^void FileSystem::AskUserUsingTopFive()$/;"	f	class:FileSystem
+BLUE	FileSystem.cpp	/^#define BLUE /;"	d	file:
+BLUE	Interface.cpp	/^#define BLUE /;"	d	file:
+BuildDir	Interface.cpp	/^MyDir*  FileSystem::BuildDir( string DirName, MyDir *currentDir )$/;"	f	class:FileSystem
+BuildDirFile	Interface.cpp	/^void  FileSystem::BuildDirFile( ifstream & token, vector<string> strspl, MyDir *currentDir )$/;"	f	class:FileSystem
+BuildFile	Interface.cpp	/^void  FileSystem::BuildFile( string FileName, int filecount, MyDir *currentDir, int id )$/;"	f	class:FileSystem
+CYAN	FileSystem.cpp	/^#define CYAN /;"	d	file:
+CYAN	Interface.cpp	/^#define CYAN /;"	d	file:
+DirCount	Interface.cpp	/^int DirCount( MyDir *currentDir )$/;"	f
+FileSystem	FileSystem.cpp	/^FileSystem::FileSystem()$/;"	f	class:FileSystem
+FileSystem	FileSystem.h	/^class FileSystem$/;"	c
+GREEN	FileSystem.cpp	/^#define GREEN /;"	d	file:
+GREEN	Interface.cpp	/^#define GREEN /;"	d	file:
+MAGENTA	FileSystem.cpp	/^#define MAGENTA /;"	d	file:
+MAGENTA	Interface.cpp	/^#define MAGENTA /;"	d	file:
+MAX_NAME	FileSystem.h	/^#define MAX_NAME /;"	d
+MyDir	FileSystem.h	/^    MyDir( MyDir* nD, MyDir* pD, MyFile* fptr, MyDir* sD, int s ):nextDir(nD),preDir(pD),filePtr(fptr),dirPtr(sD), size(s)$/;"	f	struct:MyDir
+MyDir	FileSystem.h	/^typedef struct MyDir$/;"	s
+MyDir	FileSystem.h	/^}MyDir;$/;"	t	typeref:struct:MyDir
+MyFile	FileSystem.h	/^    MyFile( int fid ):fid(fid)$/;"	f	struct:MyFile
+MyFile	FileSystem.h	/^typedef struct MyFile$/;"	s
+MyFile	FileSystem.h	/^} MyFile;$/;"	t	typeref:struct:MyFile
+RED	FileSystem.cpp	/^#define RED /;"	d	file:
+RED	Interface.cpp	/^#define RED /;"	d	file:
+RESET	FileSystem.cpp	/^#define RESET /;"	d	file:
+RESET	Interface.cpp	/^#define RESET /;"	d	file:
+UserInfo	FileSystem.h	/^    UserInfo( string u, string p):name(u), passwd(p){}$/;"	f	struct:UserInfo
+UserInfo	FileSystem.h	/^typedef struct UserInfo$/;"	s
+UserInfo	FileSystem.h	/^}UserInfo;$/;"	t	typeref:struct:UserInfo
+YELLOW	FileSystem.cpp	/^#define YELLOW /;"	d	file:
+YELLOW	Interface.cpp	/^#define YELLOW /;"	d	file:
+_FILESYSTEM_	FileSystem.h	/^#define _FILESYSTEM_$/;"	d
+_INTERFACE_	Interface.h	/^#define _INTERFACE_$/;"	d
+compare	Interface.cpp	/^bool compare( MyFile*A, MyFile*B)$/;"	f
+content	FileSystem.h	/^    string content ;$/;"	m	struct:MyFile
+copyDir	FileSystem.cpp	/^MyDir *FileSystem::copyDir() {$/;"	f	class:FileSystem
+copyFile	FileSystem.cpp	/^MyFile *FileSystem::copyFile() {$/;"	f	class:FileSystem
+copy_dir	FileSystem.cpp	/^MyDir *FileSystem::copy_dir(MyDir *d) {$/;"	f	class:FileSystem
+copy_file	FileSystem.cpp	/^MyFile *FileSystem::copy_file( MyFile *h )$/;"	f	class:FileSystem
+copytempdir	FileSystem.h	/^    MyDir   *copytempdir    ;$/;"	m	class:FileSystem
+copytempfile	FileSystem.h	/^    MyFile  *copytempfile   ;$/;"	m	class:FileSystem
+count	FileSystem.h	/^    int    count   ;$/;"	m	struct:MyFile
+currentDir	FileSystem.h	/^    MyDir   *currentDir     ;$/;"	m	class:FileSystem
+dele_dir	FileSystem.cpp	/^int FileSystem::dele_dir(MyDir *d) {$/;"	f	class:FileSystem
+dele_file	FileSystem.cpp	/^int FileSystem::dele_file(MyFile *f) {$/;"	f	class:FileSystem
+deleteDir	FileSystem.cpp	/^int FileSystem::deleteDir() {$/;"	f	class:FileSystem
+deleteFile	FileSystem.cpp	/^int FileSystem::deleteFile() {$/;"	f	class:FileSystem
+dirPtr	FileSystem.h	/^    MyDir   *dirPtr     ;\/\/The first dir on next layer$/;"	m	struct:MyDir
+disk_empty	FileSystem.cpp	/^int disk_empty = 10000 ; \/\/Global variable, the size of virtual disk$/;"	v
+dumpDirContent	Interface.cpp	/^void FileSystem::dumpDirContent( FILE* f, FILE*f2, MyDir* currentDir, int layer )$/;"	f	class:FileSystem
+dumpDirTree	Interface.cpp	/^void FileSystem::dumpDirTree()$/;"	f	class:FileSystem
+edit	FileSystem.cpp	/^int FileSystem::edit() {$/;"	f	class:FileSystem
+error	FileSystem.cpp	/^string error[] = {"\/","\\\\", ":","<",">","|","*","&"} ;  \/\/Illegal character$/;"	v
+fid	FileSystem.h	/^    int    fid     ;$/;"	m	struct:MyFile
+filePtr	FileSystem.h	/^    MyFile  *filePtr    ;$/;"	m	struct:MyDir
+filenumber	FileSystem.h	/^    int     filenumber      ;$/;"	m	class:FileSystem
+fsOperate	Interface.cpp	/^int FileSystem::fsOperate( string user, string passwd )$/;"	f	class:FileSystem
+getCurrentdir	FileSystem.cpp	/^MyDir *FileSystem::getCurrentdir() {$/;"	f	class:FileSystem
+getFileMap	FileSystem.h	/^    map   < int,MyFile* >  &getFileMap()   { return mFile ; }$/;"	f	class:FileSystem
+getFileNumber	FileSystem.h	/^    int  getFileNumber( )      { return filenumber ; }$/;"	f	class:FileSystem
+getFileVector	FileSystem.h	/^    vector< MyFile*  > &getFileVector(){ return vFile ; }$/;"	f	class:FileSystem
+getSize	FileSystem.cpp	/^int FileSystem::getSize() {$/;"	f	class:FileSystem
+getUserVector	FileSystem.h	/^    vector< UserInfo > &getUserVector(){ return vUser ; }$/;"	f	class:FileSystem
+goback	FileSystem.cpp	/^int FileSystem::goback() {$/;"	f	class:FileSystem
+help	Interface.cpp	/^void help()$/;"	f
+login	Interface.cpp	/^int FileSystem::login( string username, string password )$/;"	f	class:FileSystem
+mFile	FileSystem.h	/^    map   <int,MyFile*>  mFile  ;$/;"	m	class:FileSystem
+main	main.cpp	/^int main()$/;"	f
+name	FileSystem.h	/^    char    name[MAX_NAME]  ;$/;"	m	class:FileSystem
+name	FileSystem.h	/^    string  name        ;$/;"	m	struct:MyDir
+name	FileSystem.h	/^    string name    ;$/;"	m	struct:MyFile
+name	FileSystem.h	/^    string name   ;\/\/User name$/;"	m	struct:UserInfo
+newDir	FileSystem.cpp	/^int FileSystem::newDir( )$/;"	f	class:FileSystem
+newFile	FileSystem.cpp	/^int FileSystem::newFile() {$/;"	f	class:FileSystem
+nextDir	FileSystem.h	/^    MyDir   *nextDir    ;\/\/The next dir, which is on the same layer$/;"	m	struct:MyDir
+nextFile	FileSystem.h	/^    struct MyFile *nextFile;$/;"	m	struct:MyFile	typeref:struct:MyFile::MyFile
+passwd	FileSystem.h	/^    string passwd ;\/\/User password$/;"	m	struct:UserInfo
+password	FileSystem.h	/^    char    password[MAX_NAME];$/;"	m	class:FileSystem
+pasteDir	FileSystem.cpp	/^int FileSystem::pasteDir() {$/;"	f	class:FileSystem
+pasteFile	FileSystem.cpp	/^int FileSystem::pasteFile() {$/;"	f	class:FileSystem
+preDir	FileSystem.h	/^    MyDir   *preDir     ;$/;"	m	struct:MyDir
+preDir	FileSystem.h	/^    struct MyDir  *preDir  ;$/;"	m	struct:MyFile	typeref:struct:MyFile::MyDir
+readDir	FileSystem.cpp	/^int FileSystem::readDir() {$/;"	f	class:FileSystem
+readDirTree	Interface.cpp	/^void FileSystem::readDirTree()$/;"	f	class:FileSystem
+readFile	FileSystem.cpp	/^int FileSystem::readFile() {$/;"	f	class:FileSystem
+readFileContent	Interface.cpp	/^void FileSystem::readFileContent()$/;"	f	class:FileSystem
+readUserInfo	Interface.cpp	/^void FileSystem::readUserInfo()$/;"	f	class:FileSystem
+regist	Interface.cpp	/^int FileSystem::regist( string username, string password )$/;"	f	class:FileSystem
+renameDir	FileSystem.cpp	/^int FileSystem::renameDir() {$/;"	f	class:FileSystem
+renameFile	FileSystem.cpp	/^int FileSystem::renameFile() {$/;"	f	class:FileSystem
+root	FileSystem.h	/^    MyDir   *root           ; \/\/root directory$/;"	m	class:FileSystem
+run	Interface.cpp	/^void FileSystem::run()$/;"	f	class:FileSystem
+setFileNumber	FileSystem.h	/^    void setFileNumber( int n ){ filenumber = n    ; }$/;"	f	class:FileSystem
+setUser	FileSystem.cpp	/^int FileSystem::setUser( string user, string passwd )$/;"	f	class:FileSystem
+showCurrentDir	FileSystem.cpp	/^int FileSystem::showCurrentDir()$/;"	f	class:FileSystem
+showPath	FileSystem.cpp	/^int FileSystem::showPath()\/\/Show the current path$/;"	f	class:FileSystem
+show_path	FileSystem.cpp	/^int FileSystem::show_path(MyDir *d)\/\/show the current path$/;"	f	class:FileSystem
+size	FileSystem.h	/^    int     size            ;$/;"	m	class:FileSystem
+size	FileSystem.h	/^    int    size    ;$/;"	m	struct:MyFile
+size	FileSystem.h	/^    int size;$/;"	m	struct:MyDir
+stringsplit	Interface.cpp	/^vector<string> stringsplit( string line )$/;"	f
+tab_level	Interface.cpp	/^string tab_level( int layer )$/;"	f
+userhomeDir	FileSystem.h	/^    MyDir  *userhomeDir ;$/;"	m	struct:UserInfo
+vFile	FileSystem.h	/^    vector<MyFile*>  vFile  ;$/;"	m	class:FileSystem
+vUser	FileSystem.h	/^    vector<UserInfo> vUser  ;$/;"	m	class:FileSystem
+~FileSystem	FileSystem.cpp	/^FileSystem::~FileSystem() {$/;"	f	class:FileSystem

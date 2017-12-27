@@ -148,7 +148,6 @@ int FileSystem::fsOperate( string user, string passwd )
             }
             else if (choice == "find") {
                 char fname[200] ;
-                //FindFileName( choice.c_str(), fname );
                 cin >> fname ;
                 this->find( fname );
             }
@@ -156,6 +155,9 @@ int FileSystem::fsOperate( string user, string passwd )
                 help();
             } else if (choice == "mkdir?")
                 cout << "Make a new direcotry: mkdir [dirname]" << endl;
+            else if( choice == "show" ){
+                AskUserUsingTopFive() ;
+            }
             else if (choice == "mk?")
                 cout << "Make a new file: mk[filename]" << endl;
             else if (choice == "rmdir?")
@@ -562,7 +564,6 @@ void FileSystem::run()
         cout << "\t\t**********************************************************t" << endl;
         cout << "\t\tPlease choice: " ;
         cin >> choice;
-        cout << choice ;
         
         switch ( choice )
         {

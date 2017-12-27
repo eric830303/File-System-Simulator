@@ -818,6 +818,12 @@ MyDir *FileSystem::getCurrentdir() {
     return currentDir;
 }
 
+//****************************************************************************************
+//* Fun Name: FindFilePath()                                                             *
+//* Work: split the string name of filepath                                              *
+//* Where to be called: fsoperate()                                                      *
+//* Editor: Zong Bin, Chen                                                               *
+//****************************************************************************************
 const char* FindFilePath ( const char* str, char* path) { //parse file path
     string str11(str);
     int idx=0;
@@ -832,7 +838,12 @@ const char* FindFilePath ( const char* str, char* path) { //parse file path
     
     return str11.substr(0,res).c_str(); //filepath
 }
-
+//****************************************************************************************
+//* Fun Name: FindFileName()                                                             *
+//* Work: split the string name of filepath                                              *
+//* Where to be called: fsoperate()                                                      *
+//* Editor: Zong Bin, Chen                                                               *
+//****************************************************************************************
 const char* FindFileName ( const char* str, char* file_name) { //parse file name
     string str11(str);
     int idx=0;
@@ -846,172 +857,80 @@ const char* FindFileName ( const char* str, char* file_name) { //parse file name
         return 0;
     
     return str11.substr(res+1,str11.length()).c_str(); //filename
-    
 }
-void FileSystem::find(char* fileName) {
+//****************************************************************************************
+//* Fun Name: find()                                                                     *
+//* Work: find the specefied files in the whole system                                   *
+//* Where to be called: fsoperate()                                                      *
+//* Editor: CHENG SHIANG, SHIU                                                           *
+//****************************************************************************************
+void FileSystem::find(char* fileName)
+{
+    int numberOfDirectory = 0, shortcutChoice ;
     
-    
-    
-    int numberOfDirectory = 0,
-    
-    shortcutChoice;
-    
-    //string fileName;
-    
-    MyDir *currentProcessedDir = root;//set initial MyDir to root
-    
-    MyFile *currentProcessedFile = root->filePtr;//set initial MyFile to the first file of directory root
-    
-    vector<MyDir*>
-    
-    nextDirVector,
-    
-    matchingDirVector;
-    
-    
-    
-    //record the name inserted by user
-    
-    //cin >> fileName;
-    
-    
+    MyDir  *currentProcessedDir  = root ;//set initial MyDir to root
+    MyFile *currentProcessedFile = root->filePtr ;//set initial MyFile to the first file of directory root
+    vector<MyDir*> nextDirVector, matchingDirVector;
     
     //continue compare file in directory if currentProcessedDir isn't NULL
-    
     while (currentProcessedDir != NULL) {
-        
-        
-        
         //enqueue dirPtr to vector if not NULL
-        
         if (currentProcessedDir->dirPtr != NULL)
-            
             nextDirVector.push_back(currentProcessedDir->dirPtr);
-        
-        
-        
         //process directory for files that matches
-        
         while (currentProcessedFile != NULL) {
-            
-            
-            
             //if file matching is found, record and show the current processed directory and break the while loop
-            
             if (strcmp(currentProcessedFile->name.c_str(), fileName) == 0) {
-                
-                
-                
                 cout << "(" << ++numberOfDirectory << ") found in directory: " << currentProcessedDir->name << endl;
-                
                 matchingDirVector.push_back(currentProcessedDir);
-                
                 break;
-                
-                
-                
             }
-            
             //point to next MyFile if exists and no file matching is found
-            
             currentProcessedFile = currentProcessedFile->nextFile;
-            
-            
-            
         }
-        
-        
-        
         //point to nextDir if exists
         
         if (currentProcessedDir->nextDir != NULL) {
-            
             currentProcessedDir = currentProcessedDir->nextDir;
-            
             currentProcessedFile = currentProcessedDir->filePtr;
-            
         }
-        
         //if nextDir is NULL, dequeue nextDirVector to process child directory of some directory if exists
-        
         else if (nextDirVector.size() != 0) {
             
             currentProcessedDir = nextDirVector[0];
-            
             nextDirVector.erase(nextDirVector.begin());
-            
             currentProcessedFile = currentProcessedDir->filePtr;
-            
         }
-        
         //set currentProcessedDir to NULL if both conditions previously are false
-        
         else
-            
             currentProcessedDir = NULL;
-        
-        
-        
     }
-    
-    
-    
     //neglect the string previously inputed
-    
     //cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    
-    
-    
     //if nothing is found, show the error message
     
     if (matchingDirVector.size() == 0)
-        
         cout << "!!! no corresponding file is found !!!" << endl;
-    
     //if at least one file is found, ask for choice of shortcut
-    
     else {
-        
-        
-        
         //loop until the integer with correct range is inputed
-        
         while (true) {
-            
-            
             cout << "please input choice for directory shortcut (1 ~ " << numberOfDirectory << "), input (0) for cancel: ";
             cin >> shortcutChoice;
-            
-            
-            
             //if "0" is entered, simply terminate current function
             
             if (shortcutChoice == 0)
-                
                 return;
-            
             //the correct range is inputed, set the currentDir to chosen shortcut before terminate
-            
             else if (1 <= shortcutChoice && shortcutChoice <= numberOfDirectory) {
-                
                 currentDir = matchingDirVector[shortcutChoice - 1];
-                
                 return;
-                
             }
-            
             //integer with incorrect range is inputed
-            
             else
-                
                 cout << "!!! input error, the integer inputed isn't in correct range !!!" << endl;
-            
-            
-            
         }
-        
     }
-    
 }
 
 
