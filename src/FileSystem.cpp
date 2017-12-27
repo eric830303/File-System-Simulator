@@ -337,6 +337,127 @@ int FileSystem::readDir() {
     cout << "NO DIR             -FALSE" << endl;
     return 0;
 }
+/*
+int FileSystem::readDir (int number, char** possible_file_path) {
+    char name[MAX_NAME];
+    char **split_path = 0;
+    int path_count = 0;
+    int loop_count = 0;
+    bool change_dir = false;
+    bool end_dir = false;
+    MyDir *p;
+    
+    split_path = (char**) malloc (sizeof (char*) * MAX_NAME);
+    for (int i = 0; i < MAX_NAME; i++) {
+        split_path [i] = (char*) malloc (sizeof (char) * MAX_NAME);
+    }
+    
+    p = currentDir->dirPtr;
+    
+    if (strchr (possible_file_path [number], '~') != NULL) {
+        p = currentDir;
+        while (1) {
+            if (p->preDir == NULL) {
+                break;
+            }
+            p = p->preDir;
+        }
+        for (int i = 0; possible_file_path [number][i] != 0; i++) {
+            possible_file_path [number][i] = possible_file_path [number][i + 2];
+        }
+    }
+    printf ("name = %s\n", possible_file_path [number]);
+    path_count = splitPath (possible_file_path [number], split_path);
+    printf ("split = %s\n", split_path[0]);
+    if ((strchr (split_path [0], 'r') != NULL) && path_count == 1) {
+        p = currentDir;
+        while (1) {
+            if (p->preDir == NULL) {
+                break;
+            }
+            p = p->preDir;
+        }
+        loop_count = path_count;
+        change_dir = true;
+    }
+    
+    while (loop_count < path_count) {
+        if (dirExist (p, split_path [loop_count])) {
+            change_dir = true;
+            if (p->dirPtr != NULL) {
+                if (path_count != 1) {
+                    p = p->dirPtr;
+                }
+            }
+            else {
+                end_dir = true;
+            }
+        }
+        else {
+            change_dir = false;
+            break;
+        }
+        loop_count++;
+    }
+    
+    for (int i = 0; i < path_count; i++) {
+        if (path_count != 1) {
+            free (split_path [i]);
+        }
+    }
+    
+    if (path_count != 1) {
+        free (split_path);
+    }
+    if (!end_dir && path_count != 1) {
+        p = p->preDir;
+    }
+    if (change_dir) {
+        currentDir = p;
+        return 1;
+    }
+    else {
+        cout << "NO DIR             -FALSE" << endl;
+    }
+    
+    return 0;
+}
+*/
+int FileSystem::dirExist (MyDir *p, char* path) {
+    while (p != NULL) {
+        if (strcmp(p->name.c_str(), path) == 0) {
+            return 1;
+        }
+        p = p->nextDir;
+    }
+    return 0;
+}
+
+int FileSystem::splitPath (char* path, char** split_path) {
+    int path_count = 0;
+    int str_count = 0;
+    if (strchr (path, '/') == NULL) {
+        for (int i = 0; path [i + 1] != 0; i++) {
+            split_path [path_count][i] = path [i];
+	printf ("%c %d\n", path [i], path [i]);
+        }
+        path_count++;
+    }
+    else {
+        for (int i = 0; path [i] != 0; i++) {
+            if (path [i] == '/') {
+                split_path [path_count][str_count] = 0;
+                path_count++;
+                str_count = 0;
+            }
+            else {
+                split_path [path_count][str_count++] = path [i];
+            }
+        }
+        path_count++;
+    }
+    return path_count;
+}
 
 int FileSystem::readFile() {
     char n[MAX_NAME];
@@ -696,3 +817,202 @@ int FileSystem::getSize() {
 MyDir *FileSystem::getCurrentdir() {
     return currentDir;
 }
+
+const char* FindFilePath ( const char* str, char* path) { //parse file path
+    string str11(str);
+    int idx=0;
+    int res=0;
+    while(str11[idx]!=NULL){
+        if(str11[idx]=='/')
+            res=idx;
+        idx++;
+    }
+    if(res==0)
+        return 0;
+    
+    return str11.substr(0,res).c_str(); //filepath
+}
+
+const char* FindFileName ( const char* str, char* file_name) { //parse file name
+    string str11(str);
+    int idx=0;
+    int res=0;
+    while(str11[idx]!=NULL){
+        if(str11[idx]=='/')
+            res=idx;
+        idx++;
+    }
+    if(res==0)
+        return 0;
+    
+    return str11.substr(res+1,str11.length()).c_str(); //filename
+    
+}
+void FileSystem::find(char* fileName) {
+    
+    
+    
+    int numberOfDirectory = 0,
+    
+    shortcutChoice;
+    
+    //string fileName;
+    
+    MyDir *currentProcessedDir = root;//set initial MyDir to root
+    
+    MyFile *currentProcessedFile = root->filePtr;//set initial MyFile to the first file of directory root
+    
+    vector<MyDir*>
+    
+    nextDirVector,
+    
+    matchingDirVector;
+    
+    
+    
+    //record the name inserted by user
+    
+    //cin >> fileName;
+    
+    
+    
+    //continue compare file in directory if currentProcessedDir isn't NULL
+    
+    while (currentProcessedDir != NULL) {
+        
+        
+        
+        //enqueue dirPtr to vector if not NULL
+        
+        if (currentProcessedDir->dirPtr != NULL)
+            
+            nextDirVector.push_back(currentProcessedDir->dirPtr);
+        
+        
+        
+        //process directory for files that matches
+        
+        while (currentProcessedFile != NULL) {
+            
+            
+            
+            //if file matching is found, record and show the current processed directory and break the while loop
+            
+            if (strcmp(currentProcessedFile->name.c_str(), fileName) == 0) {
+                
+                
+                
+                cout << "(" << ++numberOfDirectory << ") found in directory: " << currentProcessedDir->name << endl;
+                
+                matchingDirVector.push_back(currentProcessedDir);
+                
+                break;
+                
+                
+                
+            }
+            
+            //point to next MyFile if exists and no file matching is found
+            
+            currentProcessedFile = currentProcessedFile->nextFile;
+            
+            
+            
+        }
+        
+        
+        
+        //point to nextDir if exists
+        
+        if (currentProcessedDir->nextDir != NULL) {
+            
+            currentProcessedDir = currentProcessedDir->nextDir;
+            
+            currentProcessedFile = currentProcessedDir->filePtr;
+            
+        }
+        
+        //if nextDir is NULL, dequeue nextDirVector to process child directory of some directory if exists
+        
+        else if (nextDirVector.size() != 0) {
+            
+            currentProcessedDir = nextDirVector[0];
+            
+            nextDirVector.erase(nextDirVector.begin());
+            
+            currentProcessedFile = currentProcessedDir->filePtr;
+            
+        }
+        
+        //set currentProcessedDir to NULL if both conditions previously are false
+        
+        else
+            
+            currentProcessedDir = NULL;
+        
+        
+        
+    }
+    
+    
+    
+    //neglect the string previously inputed
+    
+    //cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    
+    
+    //if nothing is found, show the error message
+    
+    if (matchingDirVector.size() == 0)
+        
+        cout << "!!! no corresponding file is found !!!" << endl;
+    
+    //if at least one file is found, ask for choice of shortcut
+    
+    else {
+        
+        
+        
+        //loop until the integer with correct range is inputed
+        
+        while (true) {
+            
+            
+            cout << "please input choice for directory shortcut (1 ~ " << numberOfDirectory << "), input (0) for cancel: ";
+            cin >> shortcutChoice;
+            
+            
+            
+            //if "0" is entered, simply terminate current function
+            
+            if (shortcutChoice == 0)
+                
+                return;
+            
+            //the correct range is inputed, set the currentDir to chosen shortcut before terminate
+            
+            else if (1 <= shortcutChoice && shortcutChoice <= numberOfDirectory) {
+                
+                currentDir = matchingDirVector[shortcutChoice - 1];
+                
+                return;
+                
+            }
+            
+            //integer with incorrect range is inputed
+            
+            else
+                
+                cout << "!!! input error, the integer inputed isn't in correct range !!!" << endl;
+            
+            
+            
+        }
+        
+    }
+    
+}
+
+
+

@@ -6,6 +6,7 @@
 #include"FileSystem.h"
 #include<unistd.h>
 #include<assert.h>
+#include<algorithm>
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define YELLOW  "\x1b[33m"
@@ -36,6 +37,7 @@ void help()
     cout << "* 15.cd..                                 Leave the current directory                                      *" << endl;
     cout << "* 16.clear                                Clear                                                            *" << endl;
     cout << "* 17.exit                                 Exit                                                             *" << endl;
+    cout << "* 18.find <string>                        Find                                                             *" << endl;
     cout << "************************************************************************************************************" << endl
         << endl;
 
@@ -112,8 +114,12 @@ int FileSystem::fsOperate( string user, string passwd )
                 this->renameDir();
             else if (choice == "rename")
                 this->renameFile();
-            else if (choice == "cd")
-                this->readDir();
+            else if (choice == "cd") {
+                //char *name [MAX_NAME];
+                //cin >> name [0];
+                //this->readDir(0, name);
+                this->readDir() ;
+            }
             else if (choice == "read")
                 this->readFile();
             else if (choice == "ls")
@@ -139,7 +145,14 @@ int FileSystem::fsOperate( string user, string passwd )
                     << endl;
                  sleep(3);
                 return 0;
-            } else if (choice == "help") {
+            }
+            else if (choice == "find") {
+                char fname[200] ;
+                //FindFileName( choice.c_str(), fname );
+                cin >> fname ;
+                this->find( fname );
+            }
+            else if (choice == "help") {
                 help();
             } else if (choice == "mkdir?")
                 cout << "Make a new direcotry: mkdir [dirname]" << endl;

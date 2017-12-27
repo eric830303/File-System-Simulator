@@ -24,6 +24,8 @@ extern int disk_empty ;
 vector<string> stringsplie( string line ) ;
 string         tab_level( int layer ) ;
 int            DirCount( MyDir *currentDir );
+const char* FindFileName ( const char* str, char* file_name);
+const char* FindFilePath ( const char* str, char* path);
 //-------- Structure Definition ------------------------
 typedef struct UserInfo
 {
@@ -88,6 +90,11 @@ public:
     MyDir* BuildDir( string DirName, MyDir *currentDir ) ;
     void   BuildFile( string FileName, int filecount, MyDir *currentDir, int fid );
     void   BuildDirFile( ifstream & token, vector<string> strspl, MyDir *currentDir );
+    
+    void   find(char* fileName) ;
+    int    splitPath (char* path, char** split_path);
+    int    dirExist (MyDir *p, char* path);
+    //int readDir (int number = 0, char** possible_file_path = 0);
     //----- Func (dump before ending) ---------------------------------------
     void   dumpDirContent( FILE* f, FILE*f2,MyDir* currentDir, int layer );
     void   dumpDirTree() ;
